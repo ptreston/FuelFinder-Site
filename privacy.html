@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Fuel Finder</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #1a1a2e;
+      background: #f8f9fa;
+    }
+
+    header {
+      background: #16a34a;
+      color: white;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    header a:hover { opacity: 0.85; }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 800;
+      color: #16a34a;
+      margin-bottom: 4px;
+    }
+    .updated {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 32px;
+    }
+
+    p { margin-bottom: 16px; }
+
+    h2 {
+      font-size: 19px;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin: 36px 0 12px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #374151;
+      margin: 20px 0 8px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-bottom: 16px;
+    }
+    ul li { margin-bottom: 6px; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    th {
+      background: #f3f4f6;
+      text-align: left;
+      padding: 10px 12px;
+      font-weight: 700;
+      border-bottom: 2px solid #e5e7eb;
+    }
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+    }
+    td a, p a { color: #16a34a; }
+    td a:hover, p a:hover { text-decoration: underline; }
+
+    hr {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 32px 0;
+    }
+
+    .contact-box {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-top: 8px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #9ca3af;
+      padding: 24px;
+      border-top: 1px solid #e5e7eb;
+    }
+    footer a { color: #16a34a; text-decoration: none; }
+
+    @media (max-width: 600px) {
+      table { font-size: 12px; }
+      th, td { padding: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">⛽ Fuel Finder</a>
+</header>
+
+<div class="container">
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated: 15 March 2026</p>
+
+  <p>
+    Fuel Finder ("the app", "we", "us") is a free Android application that helps UK drivers find petrol
+    and diesel prices and EV charging points near them.
+  </p>
+  <p>
+    This policy explains what data we collect, how we use it, and your rights.
+    We have designed the app to collect as little data as possible.
+  </p>
+
+  <h2>1. What data we collect</h2>
+
+  <h3>1.1 Location</h3>
+  <ul>
+    <li><strong>Precise location</strong> — collected on your device when you use the Near Me, Map, Route,
+    or Alerts screens. Used only to find stations near you or along your route. Your location is sent to our
+    backend (Supabase, see §3) to perform the database query and is not stored in our database.</li>
+    <li><strong>Approximate location</strong> — used on the map screen if you grant only approximate permission.</li>
+  </ul>
+  <p>Location is only accessed when the app is open and in the foreground. We do not collect background location.</p>
+
+  <h3>1.2 Push notification token</h3>
+  <p>
+    If you enable price alerts, the app registers a device token with Firebase Cloud Messaging (FCM, see §3).
+    This token is stored in our Supabase database alongside your home postcode coordinates (if set) so we can
+    send you price alerts. The token is a random identifier and does not contain any personal information.
+    It can be deleted by disabling alerts in the app.
+  </p>
+
+  <h3>1.3 Home postcode</h3>
+  <p>
+    If you enter a home postcode in Settings, the app converts it to latitude/longitude coordinates using the
+    postcodes.io API and stores those coordinates in our Supabase database linked to your push notification token.
+    The raw postcode text is stored on your device only; only the coordinates are sent to the server.
+  </p>
+
+  <h3>1.4 App preferences</h3>
+  <p>
+    Your settings (preferred fuel type, tank size, fuel efficiency, theme, map style, widget mode) are stored
+    locally on your device using Android's SharedPreferences. They are never uploaded to our servers.
+  </p>
+
+  <h2>2. What we do NOT collect</h2>
+  <ul>
+    <li>We do not collect your name, email address, or any account information. There is no account system.</li>
+    <li>We do not collect your precise driving routes or history.</li>
+    <li>We do not use advertising SDKs or analytics SDKs (no Google Analytics, Firebase Analytics, Crashlytics, etc.).</li>
+    <li>We do not sell any data to third parties.</li>
+    <li>We do not share your location with any third party beyond what is described in §3.</li>
+  </ul>
+
+  <h2>3. Third-party services</h2>
+  <p>The app uses the following third-party services. Each has its own privacy policy.</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Purpose</th>
+        <th>Data sent</th>
+        <th>Privacy policy</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Supabase</strong> (Ireland/EU)</td>
+        <td>Backend database — stores fuel station data, prices, and (if alerts are enabled) your push token and home coordinates</td>
+        <td>Location coordinates (per query), push token, home coordinates</td>
+        <td><a href="https://supabase.com/privacy" target="_blank">supabase.com/privacy</a></td>
+      </tr>
+      <tr>
+        <td><strong>Firebase Cloud Messaging</strong> (Google)</td>
+        <td>Delivers price alert push notifications to your device</td>
+        <td>Push notification token</td>
+        <td><a href="https://firebase.google.com/support/privacy" target="_blank">firebase.google.com/support/privacy</a></td>
+      </tr>
+      <tr>
+        <td><strong>OpenStreetMap / tile providers</strong></td>
+        <td>Map tiles displayed in the app</td>
+        <td>Your IP address (standard web request)</td>
+        <td><a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank">osmfoundation.org</a></td>
+      </tr>
+      <tr>
+        <td><strong>OSRM</strong></td>
+        <td>Route calculation for the Route screen</td>
+        <td>Origin and destination coordinates</td>
+        <td>Open-source — no personal data retained</td>
+      </tr>
+      <tr>
+        <td><strong>postcodes.io</strong></td>
+        <td>Converts a UK postcode to coordinates when you set your home postcode</td>
+        <td>The postcode text you enter</td>
+        <td>Open-source — no personal data retained</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>
+    Fuel station and EV charger data is sourced from the <strong>CMA Fuel Finder API</strong> (UK Government,
+    Open Government Licence v3.0) and <strong>OpenChargeMap</strong> (Creative Commons Attribution 4.0).
+    These are data sources only; no personal data is sent to them.
+  </p>
+
+  <h2>4. Data storage and retention</h2>
+  <p><strong>Data stored in our Supabase database:</strong></p>
+  <ul>
+    <li><strong>Push notification token and home coordinates</strong> — retained as long as you have price alerts
+    enabled. Clearing your push token from the Alerts screen or uninstalling the app will cause the token to expire
+    naturally (FCM tokens expire after ~270 days of inactivity). You can request deletion at any time — see §6.</li>
+    <li><strong>Fuel station and price data</strong> — public data from government and open-data sources. Contains
+    no personal information.</li>
+  </ul>
+  <p><strong>Data stored on your device:</strong></p>
+  <ul>
+    <li>App preferences and cached station results — stored locally and never uploaded. You can clear the cache
+    from Settings → Clear offline cache.</li>
+  </ul>
+
+  <h2>5. Children</h2>
+  <p>
+    The app is not directed at children under 13 and does not knowingly collect personal data from children.
+    The app is rated Everyone (PEGI 3) and has no features requiring user accounts.
+  </p>
+
+  <h2>6. Your rights</h2>
+  <p>Under UK GDPR you have the right to:</p>
+  <ul>
+    <li><strong>Access</strong> — request a copy of any personal data we hold about you</li>
+    <li><strong>Deletion</strong> — request that your data (push token and home coordinates) be deleted from our servers</li>
+    <li><strong>Correction</strong> — request correction of inaccurate data</li>
+  </ul>
+  <p>To exercise any of these rights, or to ask questions about this policy, contact us at:</p>
+  <div class="contact-box">
+    <strong>[your-email@example.com]</strong>
+  </div>
+  <p style="margin-top:12px;">We will respond within 30 days.</p>
+
+  <h2>7. Changes to this policy</h2>
+  <p>
+    We may update this policy when we add new features. The date at the top of this page will always reflect
+    the most recent update. Continued use of the app after a policy update constitutes acceptance of the
+    updated policy.
+  </p>
+
+  <h2>8. Legal basis (UK GDPR)</h2>
+  <p>
+    We rely on <strong>legitimate interests</strong> as the lawful basis for processing location data and push
+    tokens — specifically, providing the core features of the app that users have explicitly opted into. You can
+    withdraw your consent at any time by disabling location access in Android settings or clearing your push
+    token from the Alerts screen.
+  </p>
+</div>
+
+<footer>
+  <p><a href="index.html">← Back to Fuel Finder</a> &nbsp;·&nbsp; &copy; 2026 Fuel Finder</p>
+</footer>
+
+</body>
+</html>

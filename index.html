@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fuel Finder — UK Petrol &amp; Diesel Price Finder</title>
+  <meta name="description" content="Find the cheapest petrol and diesel prices near you across the UK. Real-time prices, price alerts, route planning, EV charging, and price history — free on Android.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green: #16a34a;
+      --green-dark: #166534;
+      --green-light: #f0fdf4;
+      --text: #1a1a2e;
+      --muted: #6b7280;
+      --border: #e5e7eb;
+      --bg: #ffffff;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+
+    /* ── Nav ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 100;
+    }
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--green);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .nav-links { display: flex; gap: 24px; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--green); }
+
+    /* ── Hero ── */
+    .hero {
+      background: linear-gradient(135deg, #16a34a 0%, #065f46 100%);
+      color: white;
+      padding: 80px 32px 72px;
+      text-align: center;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 20px;
+      padding: 4px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+    }
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 56px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero h1 span { color: #86efac; }
+    .hero p {
+      font-size: clamp(16px, 2.5vw, 20px);
+      opacity: 0.88;
+      max-width: 560px;
+      margin: 0 auto 36px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      color: var(--green-dark);
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.9; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: white;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: border-color 0.15s;
+    }
+    .btn-secondary:hover { border-color: white; }
+
+    /* ── Section shared ── */
+    section { padding: 72px 32px; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section-label {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: clamp(24px, 4vw, 36px);
+      font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 48px;
+    }
+
+    /* ── Features ── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+    }
+    .feature-card {
+      background: var(--green-light);
+      border: 1px solid #bbf7d0;
+      border-radius: 16px;
+      padding: 24px;
+    }
+    .feature-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+    .feature-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .feature-card p {
+      font-size: 14px;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    /* ── Screenshots placeholder ── */
+    .screenshots {
+      background: #f8f9fa;
+    }
+    .screenshots-grid {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+    .screenshot-placeholder {
+      flex: 0 0 200px;
+      height: 400px;
+      background: #e5e7eb;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #9ca3af;
+      font-size: 13px;
+      text-align: center;
+      border: 2px dashed #d1d5db;
+    }
+
+    /* ── Stats / pill bar ── */
+    .stats-bar {
+      background: var(--green);
+      color: white;
+      padding: 36px 32px;
+    }
+    .stats-inner {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 24px;
+      text-align: center;
+    }
+    .stat h3 {
+      font-size: 32px;
+      font-weight: 900;
+    }
+    .stat p {
+      font-size: 14px;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+
+    /* ── Privacy callout ── */
+    .privacy-callout {
+      background: var(--green-light);
+      border-radius: 16px;
+      padding: 32px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .privacy-callout .icon { font-size: 32px; flex-shrink: 0; margin-top: 2px; }
+    .privacy-callout h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .privacy-callout p { font-size: 15px; color: #374151; margin-bottom: 12px; }
+    .privacy-callout a { color: var(--green); font-weight: 600; text-decoration: none; }
+    .privacy-callout a:hover { text-decoration: underline; }
+
+    /* ── Footer ── */
+    footer {
+      background: #111827;
+      color: #9ca3af;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    footer .footer-logo {
+      font-size: 20px;
+      font-weight: 800;
+      color: #16a34a;
+      margin-bottom: 12px;
+    }
+    footer p { font-size: 13px; margin-bottom: 8px; }
+    footer a { color: #6b7280; text-decoration: none; margin: 0 8px; }
+    footer a:hover { color: #16a34a; }
+    .footer-links { margin: 16px 0; }
+
+    @media (max-width: 600px) {
+      nav { padding: 14px 16px; }
+      .nav-links { display: none; }
+      section { padding: 48px 16px; }
+      .hero { padding: 56px 16px 48px; }
+      .privacy-callout { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a class="nav-logo" href="#">⛽ Fuel Finder</a>
+  <div class="nav-links">
+    <a href="#features">Features</a>
+    <a href="#privacy">Privacy</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">🇬🇧 UK Petrol &amp; Diesel Prices</div>
+  <h1>Find the <span>cheapest fuel</span><br>near you</h1>
+  <p>Real-time petrol and diesel prices from stations across the UK. Save money every time you fill up — free on Android.</p>
+  <div class="hero-actions">
+    <!-- Replace href with your Play Store URL when published -->
+    <a class="btn-primary" href="#">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17c0-.83 1.01-1.3 1.66-.8l14 8.5c.58.35.58 1.25 0 1.6l-14 8.5c-.65.5-1.66.03-1.66-.8z"/></svg>
+      Get it on Google Play
+    </a>
+    <a class="btn-secondary" href="#features">See features</a>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat"><h3>8,000+</h3><p>Fuel stations tracked</p></div>
+    <div class="stat"><h3>6</h3><p>Fuel types covered</p></div>
+    <div class="stat"><h3>Free</h3><p>No ads, no subscription</p></div>
+    <div class="stat"><h3>UK-wide</h3><p>Coverage</p></div>
+  </div>
+</div>
+
+<!-- Features -->
+<section id="features">
+  <div class="section-inner">
+    <span class="section-label">Features</span>
+    <h2 class="section-title">Everything you need at the pump</h2>
+    <p class="section-subtitle">Built for UK drivers who want to spend less on fuel without spending time hunting for deals.</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📍</div>
+        <h3>Near Me prices</h3>
+        <p>Instantly see petrol, diesel, and alternative fuel prices at stations around you, sorted by price or distance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗺️</div>
+        <h3>Live map</h3>
+        <p>Browse stations on a map as you pan around. Colour-coded markers show cheapest and most expensive at a glance.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔍</div>
+        <h3>Postcode search</h3>
+        <p>Planning a trip? Search any UK postcode to see prices in that area before you leave.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🛣️</div>
+        <h3>Route planner</h3>
+        <p>Enter your start and end point and see the cheapest stations along your route — great for long journeys.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔔</div>
+        <h3>Price alerts</h3>
+        <p>Set alerts for specific stations or areas. Get a push notification when prices drop below your target.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Price intelligence</h3>
+        <p>See area price trends, the cheapest day of the week to fill up, and whether now is a good time based on 30-day history.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔋</div>
+        <h3>EV charging</h3>
+        <p>Find EV charging points on the same map. See connector types, speeds, and real-time availability.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏠</div>
+        <h3>Home screen widget</h3>
+        <p>See the nearest or cheapest station price at a glance, right on your home screen — no need to open the app.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Price history</h3>
+        <p>Tap any fuel type on a station page to see its full price history as a chart — spot trends over days or weeks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Screenshots -->
+<section class="screenshots" id="screenshots">
+  <div class="section-inner">
+    <span class="section-label">Screenshots</span>
+    <h2 class="section-title">See it in action</h2>
+    <div class="screenshots-grid">
+      <div class="screenshot-placeholder">Map screen<br><br>Add screenshot</div>
+      <div class="screenshot-placeholder">Near Me screen<br><br>Add screenshot</div>
+      <div class="screenshot-placeholder">Station detail<br><br>Add screenshot</div>
+      <div class="screenshot-placeholder">Price Intel<br><br>Add screenshot</div>
+      <div class="screenshot-placeholder">Route planner<br><br>Add screenshot</div>
+    </div>
+  </div>
+</section>
+
+<!-- Privacy callout -->
+<section id="privacy">
+  <div class="section-inner">
+    <div class="privacy-callout">
+      <div class="icon">🔒</div>
+      <div>
+        <h3>Built with privacy in mind</h3>
+        <p>
+          Fuel Finder does not require an account and does not sell your data.
+          Location is used only to find nearby stations and is never stored.
+          There are no advertising or analytics SDKs in the app.
+          Price alerts require only an anonymous device token — no email or name needed.
+        </p>
+        <a href="privacy.html">Read the full Privacy Policy →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">⛽ Fuel Finder</div>
+  <p>Free UK petrol and diesel price finder for Android.</p>
+  <p>Prices sourced from the UK Government CMA Fuel Finder API and OpenChargeMap.</p>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="#">Google Play</a>
+  </div>
+  <p style="margin-top:16px;">&copy; 2026 Fuel Finder. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
