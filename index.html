@@ -183,18 +183,18 @@
       overflow-x: auto;
       padding-bottom: 8px;
     }
-    .screenshot-placeholder {
-      flex: 0 0 200px;
-      height: 400px;
-      background: #e5e7eb;
+    .screenshot-img {
+      flex: 0 0 auto;
+      height: 520px;
       border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9ca3af;
-      font-size: 13px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      display: block;
+    }
+    .screenshot-caption {
       text-align: center;
-      border: 2px dashed #d1d5db;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 10px;
     }
 
     /* ── Stats / pill bar ── */
@@ -364,11 +364,26 @@
     <span class="section-label">Screenshots</span>
     <h2 class="section-title">See it in action</h2>
     <div class="screenshots-grid">
-      <div class="screenshot-placeholder">Map screen<br><br>Add screenshot</div>
-      <div class="screenshot-placeholder">Near Me screen<br><br>Add screenshot</div>
-      <div class="screenshot-placeholder">Station detail<br><br>Add screenshot</div>
-      <div class="screenshot-placeholder">Price Intel<br><br>Add screenshot</div>
-      <div class="screenshot-placeholder">Route planner<br><br>Add screenshot</div>
+      <div>
+        <img class="screenshot-img" src="assets/map.png" alt="Map screen showing fuel station prices">
+        <p class="screenshot-caption">Map</p>
+      </div>
+      <div>
+        <img class="screenshot-img" src="assets/near_me.png" alt="Near Me screen with nearby station list">
+        <p class="screenshot-caption">Near Me</p>
+      </div>
+      <div>
+        <img class="screenshot-img" src="assets/station_detail.png" alt="Station detail with price history">
+        <p class="screenshot-caption">Station Detail</p>
+      </div>
+      <div>
+        <img class="screenshot-img" src="assets/price_intel.png" alt="Price Intelligence screen">
+        <p class="screenshot-caption">Price Intel</p>
+      </div>
+      <div>
+        <img class="screenshot-img" src="assets/route_planner.png" alt="Route planner showing stations along a route">
+        <p class="screenshot-caption">Route Planner</p>
+      </div>
     </div>
   </div>
 </section>
